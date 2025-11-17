@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Server防衛Bot 公式</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+        }
+        header {
+            background: #161b22;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #30363d;
+        }
+        header .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        header img {
+            height: 55px;
+            border-radius: 8px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 700;
+            color: #58a6ff;
+        }
+        nav a {
+            margin-left: 20px;
+            color: #e6edf3;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+        nav a:hover {
+            color: #58a6ff;
+        }
+
+        .hero {
+            padding: 80px 40px;
+            text-align: center;
+            background: linear-gradient(180deg, #1f2937, #0d1117);
+        }
+        .hero h2 {
+            font-size: 46px;
+            margin-bottom: 16px;
+            font-weight: 750;
+        }
+        .hero p {
+            font-size: 20px;
+            opacity: 0.85;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 30px;
+            background: #238636;
+            padding: 16px 30px;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: 0.2s;
+        }
+        .btn:hover {
+            background: #2ea043;
+        }
+
+        .section {
+            padding: 60px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .section h3 {
+            font-size: 30px;
+            margin-bottom: 25px;
+            color: #58a6ff;
+        }
+        .section p {
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            padding: 25px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            transition: 0.2s;
+        }
+        .card:hover {
+            border-color: #58a6ff;
+        }
+        .card h4 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #79c0ff;
+        }
+
+        .command-box {
+            background: #1b1f24;
+            padding: 18px;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            font-family: monospace;
+            margin: 10px 0;
+            font-size: 15px;
+        }
+
+        footer {
+            background: #161b22;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid #30363d;
+            font-size: 14px;
+            opacity: 0.75;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-area">
+        <img src="logo.png" alt="Server防衛Bot ロゴ">
+        <h1>Server防衛Bot</h1>
+    </div>
+
+    <nav>
+        <a href="#setup">初期設定</a>
+        <a href="#features">機能</a>
+        <a href="#commands">コマンド</a>
+        <a href="#support">サポート</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>あなたのサーバーを、要塞に。</h2>
+    <p>荒らし対策 / スパム防止 / ロール保護 / チャンネル保護 をすべて自動化。</p>
+    <a class="btn" href="https://discord.com/oauth2/authorize?client_id=1437806290238967849&permissions=8&integration_type=0&scope=applications.commands+bot">
+        ➕ Server防衛Bot を追加
+    </a>
+</section>
+
+<section class="section" id="setup">
+    <h3>🔰 初期設定</h3>
+
+    <p>Botを追加したら、まず次の 5 つを設定してください。</p>
+
+    <h4>① モード設定</h4>
+    <div class="command-box">/mode</div>
+    <p>Sentinel / Aegis / Overdrive から選択します。</p>
+
+    <h4>② 通報先チャンネルの設定</h4>
+    <div class="command-box">/setreportchannel</div>
+
+    <h4>③ 管理者の登録</h4>
+    <div class="command-box">/setadmin @ユーザー</div>
+
+    <h4>④ 自動防衛（AutoDefense）の有効化</h4>
+    <div class="command-box">/autodef set on</div>
+
+    <h4>⑤ 許可するBOTの設定（荒らしbotの対策です）</h4>
+    <div class="command-box">/allowbot add &lt;BOT ID&gt;</div>
+
+</section>
+
+<section class="section" id="features">
+    <h3>🛡 主な機能</h3>
+    <div class="cards">
+        <div class="card">
+            <h4>🔒 自動防衛システム</h4>
+            <p>高速連投、リンク爆撃、新規アカウント攻撃を自動検知して隔離します。</p>
+        </div>
+        <div class="card">
+            <h4>🛡 ロール/チャンネル保護</h4>
+            <p>大量生成や削除を検知して攻撃者の権限を即停止します。</p>
+        </div>
+        <div class="card">
+            <h4>🚫 ワード検知</h4>
+            <p>危険ワードを削除して管理者に通知。</p>
+        </div>
+        <div class="card">
+            <h4>📣 管理者DM通知</h4>
+            <p>荒らし・BOT異常行動を瞬時に通知します。</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="commands">
+    <h3>📘 主なコマンド</h3>
+
+    <h4>■ モード切り替え</h4>
+    <div class="command-box">/mode</div>
+
+    <h4>■ サーバーロック（全チャンネルをロックします）</h4>
+    <div class="command-box">/serverlock</div>
+
+    <h4>■ サーバーアンロック</h4>
+    <div class="command-box">/serverunlock</div>
+
+    <h4>■ 特定のユーザーに警告DMを送ります</h4>
+    <div class="command-box">/waron</div>
+
+    <h4>■ 通報</h4>
+    <div class="command-box">/report</div>
+</section>
+
+<section class="section" id="support">
+    <h3>💬 サポート</h3>
+    <p>質問・不具合報告は以下へお願いします。</p>
+    <a class="btn" href="https://discord.gg/8jFukmtshp">
+        サーバーに参加する
+    </a>
+</section>
+
+<footer>
+    Server防衛Bot 公式
+</footer>
+
+</body>
+</html>
