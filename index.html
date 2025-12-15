@@ -1,248 +1,484 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Server防衛Bot 公式</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server防衛BOT | 安心安全の荒らし対策BOT</title>
+    
     <style>
+        /* ------------------------------------- */
+        /* リセットと基本設定 */
+        /* ------------------------------------- */
         body {
+            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif; /* プロフェッショナルなフォント */
             margin: 0;
-            font-family: "Segoe UI", sans-serif;
-            background: #0d1117;
-            color: #e6edf3;
+            padding: 0;
+            line-height: 1.7;
+            color: #444;
+            background-color: #f0f2f5; /* 背景色をやや濃いグレーに */
         }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 25px 0;
+        }
+
+        a {
+            color: #00bcd4; /* シアン */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        h2, h3, h4 {
+            font-weight: 700;
+            color: #1A1A1A; /* 濃いチャコール */
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.6em; /* 見出しを大きく */
+            margin-bottom: 60px;
+            position: relative;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase; /* 大文字で強調 */
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background-color: #00bcd4; /* シアン */
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ------------------------------------- */
+        /* ヘッダーとナビゲーション */
+        /* ------------------------------------- */
         header {
-            background: #161b22;
-            padding: 20px 40px;
+            background-color: #1A1A1A; /* 濃いチャコールグレー */
+            color: white;
+            padding: 18px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #30363d;
-        }
-        header .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        header img {
-            height: 55px;
-            border-radius: 8px;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 26px;
-            font-weight: 700;
-            color: #58a6ff;
-        }
-        nav a {
-            margin-left: 20px;
-            color: #e6edf3;
-            text-decoration: none;
-            font-size: 16px;
-            transition: 0.2s;
-        }
-        nav a:hover {
-            color: #58a6ff;
+            padding: 0;
         }
 
-        .hero {
-            padding: 80px 40px;
-            text-align: center;
-            background: linear-gradient(180deg, #1f2937, #0d1117);
+        .logo {
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: 900;
+            color: #00bcd4; /* シアンでロゴを強調 */
+            letter-spacing: 1px;
         }
-        .hero h2 {
-            font-size: 46px;
-            margin-bottom: 16px;
-            font-weight: 750;
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
         }
-        .hero p {
-            font-size: 20px;
-            opacity: 0.85;
+
+        nav ul li {
+            margin-left: 35px;
         }
+
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+            padding: 5px 0;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul li a:hover {
+            color: #00bcd4;
+            text-decoration: none;
+        }
+
+        /* ------------------------------------- */
+        /* ボタンのスタイル */
+        /* ------------------------------------- */
         .btn {
             display: inline-block;
-            margin-top: 30px;
-            background: #238636;
-            padding: 16px 30px;
-            border-radius: 10px;
-            color: white;
-            text-decoration: none;
+            padding: 16px 45px;
+            border-radius: 4px; /* 角を少し丸く */
             font-weight: 600;
-            font-size: 18px;
-            transition: 0.2s;
-        }
-        .btn:hover {
-            background: #2ea043;
-        }
-
-        .section {
-            padding: 60px 40px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .section h3 {
-            font-size: 30px;
-            margin-bottom: 25px;
-            color: #58a6ff;
-        }
-        .section p {
-            font-size: 17px;
-            line-height: 1.8;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-        }
-        .card {
-            padding: 25px;
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            transition: 0.2s;
-        }
-        .card:hover {
-            border-color: #58a6ff;
-        }
-        .card h4 {
-            font-size: 22px;
-            margin-bottom: 12px;
-            color: #79c0ff;
-        }
-
-        .command-box {
-            background: #1b1f24;
-            padding: 18px;
-            border-radius: 8px;
-            border: 1px solid #30363d;
-            font-family: monospace;
-            margin: 10px 0;
-            font-size: 15px;
-        }
-
-        footer {
-            background: #161b22;
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            border-top: 1px solid #30363d;
-            font-size: 14px;
-            opacity: 0.75;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            text-decoration: none !important;
+            margin-top: 35px;
+            font-size: 1.1em;
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            text-transform: uppercase;
         }
+
+        .btn-cta {
+            background-color: #00bcd4; /* シアン */
+            color: #1A1A1A; /* 濃いチャコール */
+            border: none;
+        }
+        
+        .btn-cta:hover {
+            background-color: #0097a7; /* 濃いシアン */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* ------------------------------------- */
+        /* ヒーローセクション */
+        /* ------------------------------------- */
+        #hero {
+            background: 
+                linear-gradient(rgba(26, 26, 26, 0.85), rgba(26, 26, 26, 0.85)), /* 濃いチャコールオーバーレイ */
+                url('https://images.unsplash.com/photo-1579296564991-b1e6f98a39d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 160px 0;
+            min-height: 550px;
+        }
+
+        #hero h2 {
+            font-size: 3.8em; 
+            margin-bottom: 25px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+            line-height: 1.2;
+        }
+
+        #hero p {
+            font-size: 1.3em; 
+            color: #cfd8dc; /* 薄いグレー */
+            max-width: 900px;
+            margin: 0 auto 40px;
+            letter-spacing: 0.3px;
+        }
+        
+        /* ヒーローセクション内の数値実績 */
+        .stats-bar {
+            background-color: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-around;
+            max-width: 800px;
+            margin: 40px auto 0;
+        }
+        .stat-item {
+            color: white;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+        .stat-item span {
+            display: block;
+            font-size: 2.5em;
+            font-weight: 900;
+            color: #00bcd4;
+            line-height: 1.2;
+        }
+
+        /* ------------------------------------- */
+        /* ソリューションセクション (機能) */
+        /* ------------------------------------- */
+        .content-section {
+            padding: 80px 0;
+        }
+        
+        .bg-white {
+            background-color: white;
+        }
+
+        .solution-grid {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .solution-item {
+            flex-basis: calc(33.333% - 20px);
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 5px solid #00bcd4; /* シアンのライン */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .solution-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .solution-item h4 {
+            color: #1A1A1A;
+            font-size: 1.3em;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .solution-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #00bcd4;
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        
+        /* ------------------------------------- */
+        /* 導入プロセス (サービス導入ステップ) */
+        /* ------------------------------------- */
+        #process {
+             background-color: #f0f2f5;
+             padding: 80px 0;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .step-item {
+            flex-basis: calc(33.333% - 26.666px);
+            padding: 30px 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .step-item span {
+            display: block;
+            font-size: 3.5em;
+            font-weight: 900;
+            color: #00bcd4;
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+        
+        /* ------------------------------------- */
+        /* フッター */
+        /* ------------------------------------- */
+        footer {
+            background-color: #1A1A1A;
+            color: #ccc;
+            padding: 40px 0;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .footer-links li {
+            margin-left: 25px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+        }
+
+        .footer-links a:hover {
+            color: #00bcd4;
+            text-decoration: none;
+        }
+        
+        /* レスポンシブ対応 */
+        @media (max-width: 992px) {
+            .solution-item {
+                flex-basis: calc(50% - 15px);
+            }
+            .process-steps {
+                flex-direction: column;
+            }
+            .stats-bar {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #hero h2 {
+                font-size: 2.8em;
+            }
+            #hero p {
+                font-size: 1.1em;
+            }
+            .solution-item {
+                flex-basis: 100%;
+            }
+            nav ul li {
+                margin-left: 15px;
+            }
+            footer .container {
+                flex-direction: column;
+            }
+            .section-title {
+                font-size: 2em;
+            }
+        }
+
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo-area">
-        <img src="logo.png" alt="Server防衛Bot ロゴ">
-        <h1>Server防衛Bot</h1>
-    </div>
-
-    <nav>
-        <a href="#setup">初期設定</a>
-        <a href="#features">機能</a>
-        <a href="#commands">コマンド</a>
-        <a href="#support">サポート</a>
-    </nav>
-</header>
-
-<section class="hero">
-    <h2>あなたのサーバーを、要塞に。</h2>
-    <p>荒らし対策 / スパム防止 / ロール保護 / チャンネル保護 をすべて自動化。</p>
-    <a class="btn" href="https://discord.com/oauth2/authorize?client_id=1437806290238967849&permissions=8&integration_type=0&scope=applications.commands+bot">
-        ➕ Server防衛Bot を追加
-    </a>
-</section>
-
-<section class="section" id="setup">
-    <h3>🔰 初期設定</h3>
-
-    <p>Botを追加したら、まず次の 6 つを設定してください。</p>
-
-    <h4>① モード設定</h4>
-    <div class="command-box">/mode</div>
-    <p>Sentinel / Aegis / Overdrive から選択します。</p>
-
-    <h4>② 通報先チャンネルの設定</h4>
-    <div class="command-box">/setreportchannel</div>
-
-    <h4>③ 管理者の登録</h4>
-    <div class="command-box">/setadmin @ユーザー</div>
-
-    <h4>④ 自動防衛（AutoDefense）の有効化</h4>
-    <div class="command-box">/autodef set on</div>
-
-    <h4>⑤ 許可するBOTの設定（@なしで追加できます）</h4>
-    <div class="command-box">/allowbot add &lt;BOT ID&gt;</div>
-
-   </section>
-
-<section class="section" id="features">
-    <h3>🛡 主な機能</h3>
-    <div class="cards">
-        <div class="card">
-            <h4>🔒 自動防衛システム</h4>
-            <p>高速連投、リンク爆撃、新規アカウント攻撃を自動検知して隔離します。</p>
+    <header>
+        <div class="container">
+            <h1 class="logo">Server防衛BOT</h1>
+            <nav>
+                <ul>
+                    <li><a href="#solutions">ソリューション</a></li>
+                    <li><a href="#process">導入プロセス</a></li>
+                    <li><a href="#contact">サポート</a></li>
+                    <li><a href="#">技術仕様</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="card">
-            <h4>🛡 ロール/チャンネル保護</h4>
-            <p>大量生成/削除を検知して攻撃者の権限を即停止します。</p>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <h2>貴方のサーバーを守る、防衛BOT</h2>
+            <p>自動防衛システムが、荒らし行為、スパム、荒らし行為からサーバーを24時間365日保護します。信頼性を確保し、安心して使用できる環境を提供します。</p>
+            <a href="https://discord.com/oauth2/authorize?client_id=1437806290238967849&permissions=8&integration_type=0&scope=applications.commands+bot" target="_blank" class="btn btn-cta">Server防衛BOTを今すぐ導入</a>
+            
+            <div class="stats-bar">
+                <div class="stat-item"><span>99.999%</span> 稼働率</div>
+                <div class="stat-item"><span>98%</span> 満足度</div>
+                <div class="stat-item"><span>100%</span> 荒らし防止度</div>
+            </div>
         </div>
-        <div class="card">
-            <h4>🚫 ワード検知</h4>
-            <p>危険ワードを削除して管理者に通知。</p>
+    </section>
+
+    <section id="solutions" class="content-section bg-white">
+        <div class="container">
+            <h3 class="section-title">提供する主要機能</h3>
+            <div class="solution-grid">
+                
+                <div class="solution-item">
+                    <div class="solution-icon">🛡️</div>
+                    <h4>統合型ディフェンスボット</h4>
+                    <p>高速連投、外部からのリンク爆撃、新規アカウントによる集団攻撃など、あらゆる脅威を自動検知・瞬時に隔離します。</p>
+                </div>
+                
+                <div class="solution-item">
+                    <div class="solution-icon">🔒</div>
+                    <h4>高度な権限アクセス管理 (IAM)</h4>
+                    <p>管理者権限の不正利用やロール・チャンネルの大量生成/削除を検知。攻撃者の権限を即座に停止し、システム破壊を阻止します。</p>
+                </div>
+                
+                <div class="solution-item">
+                    <div class="solution-icon">👁️</div>
+                    <h4>インテリジェント・コンテンツ監視</h4>
+                    <p>危険ワードが含まれたメッセージを削除し、内容を管理者に即座に通知。内部・外部のリスクを監視します。</p>
+                </div>
+                
+                <div class="solution-item">
+                    <div class="solution-icon">🚨</div>
+                    <h4>リアルタイム・インシデント通知</h4>
+                    <p>荒らし行動やシステムへの不正アクセスを検知した際、詳細な状況を管理者にDMで瞬時に通知。初動対応を迅速化します。</p>
+                </div>
+                
+                <div class="solution-item">
+                    <div class="solution-icon">🚫</div>
+                    <h4>WebHookセキュリティ強化</h4>
+                    <p>認証済みのBot以外からの不正なWebHookメッセージをシステムレベルで完全にブロック。外部からの情報操作を防御します。</p>
+                </div>
+                
+                <div class="solution-item">
+                    <div class="solution-icon">👻</div>
+                    <h4>ステルス・モード運用</h4>
+                    <p>Platformを常時オフライン状態で稼働させることで、攻撃者に対する存在感と脆弱性の露出を最小限に抑えます。</p>
+                </div>
+
+            </div>
         </div>
-        <div class="card">
-            <h4>📣 管理者DM通知</h4>
-            <p>荒らし行動を瞬時に通知します。</p>
+    </section>
+
+    <section id="process" class="content-section">
+        <div class="container" style="text-align: center;">
+            <h3 class="section-title">ServerDefense Platform 導入プロセス</h3>
+            <p style="max-width: 800px; margin: 0 auto 50px;">当Platformの導入は、お客様のセキュリティニーズに合わせたシンプルかつ効率的なステップで進行します。</p>
+            
+            <div class="process-steps">
+                <div class="step-item">
+                    <span>1</span>
+                    <h4>防衛モード設定</h4>
+                    <p>/modeで、３種類の防衛モードから選択してください</p>
+                </div>
+                <div class="step-item">
+                    <span>2</span>
+                    <h4>自動防衛（AutoDefense）の有効化</h4>
+                    <p>これにより、bot自身が自動で防衛します。</p>
+                </div>
+                <div class="step-item">
+                    <span>3</span>
+                    <h4> 許可するBOTの設定</h4>
+                    <p>/allowbot "BOT ID"で、サーバーに導入したい未承認botをホワイトリストに追加できます。</p>
+                </div>
+            </div>
+            
         </div>
-        <div class="card">
-            <h4>📡 Webhook 防止</h4>
-            <p>認証済みBOT以外の Webhook を完全ブロックします。</p>
+    </section>
+
+    <section id="contact" class="content-section" style="background-color: #1A1A1A; color: white;">
+        <div class="container" style="text-align: center;">
+            <h3 style="color: white; margin-bottom: 10px;">お問い合わせ・テクニカルサポート</h3>
+            <p style="font-size: 1.1em; max-width: 800px; margin: 0 auto 30px;">サービス導入に関するご質問や技術的なサポート、パートナーシップのご相談は、以下のサーバーより承っております。</p>
+            <a href="https://discord.gg/E24vpGfMat" target="_blank" class="btn btn-cta" style="background-color: white; color: #1A1A1A;">お問い合わせサーバーへ</a>
         </div>
-        <div class="card">
-            <h4>👻 ステルスBOT</h4>
-            <p>Botをオフライン常にオフライン状態にすることでステルス性を保ちます。</p>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="copyright">© 2025 ServerDefense Platform. All Rights Reserved.</p>
+            <ul class="footer-links">
+                <li><a href="#">利用規約</a></li>
+                <li><a href="#">プライバシーポリシー</a></li>
+                <li><a href="#">技術仕様書</a></li>
+            </ul>
         </div>
-    </div>
-</section>
-
-<section class="section" id="commands">
-    <h3>📘 主なコマンド</h3>
-
-    <h4>■ モード切り替え</h4>
-    <div class="command-box">/mode</div>
-
-    <h4>■ サーバーロック（全チャンネルをロックします）</h4>
-    <div class="command-box">/serverlock</div>
-
-    <h4>■ サーバーアンロック</h4>
-    <div class="command-box">/serverunlock</div>
-
-    <h4>■ 特定ユーザーに警告DMを送信</h4>
-    <div class="command-box">/warn</div>
-
-    <h4>■ 許可BOTの追加</h4>
-    <div class="command-box">/allowbot add &lt;BOT ID&gt;</div>
-
-    <h4>■ 連続メンション対策</h4>
-    <div class="command-box">/antimention set &lt;on/off&gt;</div>
-</section>
-
-<section class="section" id="support">
-    <h3>💬 サポート</h3>
-    <p>質問・不具合報告は以下へお願いします。</p>
-    <a class="btn" href="https://discord.gg/8jFukmtshp">
-        サーバーに参加する
-    </a>
-</section>
-
-<footer>
-    Server防衛Bot 公式
-</footer>
+    </footer>
 
 </body>
 </html>
-
